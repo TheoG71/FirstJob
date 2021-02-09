@@ -4,19 +4,67 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
     tools:context=".MainActivity">
 
-
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Permier test"
-        />
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:text="Bonjour"
+            android:layout_gravity="center"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bienvenue sur FirstJob"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Choisissez une catégorie"
+            android:textSize="15dp"
+            android:layout_gravity="center"
+            />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Icon"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+<Spinner
+    android:id="@+id/category"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:drawable/btn_dropdown"
+    android:spinnerMode="dropdown"/>
+    />
+
+
+
     <Button
+        android:layout_marginTop="300dp"
         android:id="@+id/btn_details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="go to detailsActivity"/>
+        android:text="go to detailsActivity" />
 
     <Button
         android:id="@+id/btn_answer"
