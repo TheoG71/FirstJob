@@ -55,7 +55,18 @@
     android:layout_height="wrap_content"
     android:background="@android:drawable/btn_dropdown"
     android:spinnerMode="dropdown"/>
-    />
+
+
+    <Button
+        android:id="@+id/actu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get jobs"/>
+    <TextView
+        android:id="@+id/test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
 
 
 
@@ -70,7 +81,7 @@
         android:id="@+id/btn_answer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="go to detailsActivity"/>
+        android:text="go to answerActivity"/>
 
 
 
