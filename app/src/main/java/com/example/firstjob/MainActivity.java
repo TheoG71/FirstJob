@@ -6,10 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openActivityAnswer() {
-        Intent intent = new Intent(this, answer.class);
+        Intent intent = new Intent(this, AnswerActivity.class);
         startActivity(intent);
     }
 
