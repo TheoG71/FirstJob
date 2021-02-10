@@ -10,29 +10,27 @@ import android.widget.Button;
 import android.widget.ListView;
 import java.util.ArrayList;
 
-public class details extends AppCompatActivity {
+public class DetailsActivity extends AppCompatActivity {
 
     ListView mListView;
 
-    private ArrayList<String> Job_Title = new ArrayList();
+    private ArrayList<String> created_at = new ArrayList();
     private ArrayList<String> Company = new ArrayList();
-    private ArrayList<String> Country_State = new ArrayList();
-    private ArrayList<String> Job_Description = new ArrayList();{
-        Job_Description.add("lalalalalala");
+    private ArrayList<String> location = new ArrayList();
+    private ArrayList<String> title = new ArrayList();{
+        title.add("lalalalalala");
     }
-    private ArrayList<String> Requirements = new ArrayList();
-    private ArrayList<String> Date_Of_Publication = new ArrayList();
+    private ArrayList<String> description = new ArrayList();
 
     private ArrayList<ArrayList<String>> details  = new ArrayList();
 
     {
 
-        details.add(Job_Title);
+        details.add(created_at);
         details.add(Company);
-        details.add(Country_State);
-        details.add(Job_Description);
-        details.add(Requirements);
-        details.add(Date_Of_Publication);
+        details.add(location);
+        details.add(title);
+        details.add(description);
         System.out.println(details);
     }
 
@@ -42,7 +40,7 @@ public class details extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
         mListView = (ListView) findViewById(R.id.listView);
-        final ArrayAdapter<ArrayList<String>> adapter = new ArrayAdapter<ArrayList<String>>(details.this,android.R.layout.simple_list_item_1, android.R.id.text1, details);
+        final ArrayAdapter<ArrayList<String>> adapter = new ArrayAdapter<ArrayList<String>>(DetailsActivity.this,android.R.layout.simple_list_item_1, android.R.id.text1, details);
         mListView.setAdapter(adapter);
 
         Button btn = (Button) findViewById(R.id.btn_post);
@@ -62,6 +60,8 @@ public class details extends AppCompatActivity {
     private void openActivity(){
         Intent intent = new Intent(this, FormActivity.class);
         startActivity(intent);
+        ArrayList<String> Re = getIntent().getStringArrayListExtra("info");
+        System.out.println(Re);
     }
 
 }
