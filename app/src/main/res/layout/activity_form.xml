@@ -89,7 +89,8 @@
                 android:paddingLeft="25dp"
                 android:paddingRight="25dp"
                 android:text="@string/send"
-                android:textColor="#fff" />
+                android:textColor="#fff"
+                />
 
         </LinearLayout>
     </ScrollView>
