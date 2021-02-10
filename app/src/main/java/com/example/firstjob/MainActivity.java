@@ -29,7 +29,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-        public  static final String EXTRA_TEXT= "com.example.application.example.EXTRA_TEXT";
+        public static final String EXTRA_TEXT= "com.example.application.example.EXTRA_TEXT";
+    JSONObject main;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                             for (int i=0;i < response.length() ;i++){
-                                JSONObject main = response.getJSONObject(i);
+                                main = response.getJSONObject(i);
                                 arrayList.add(main.getString("title"));
                             }
 
@@ -93,7 +94,20 @@ public class MainActivity extends AppCompatActivity {
                             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                    openActivityDetails(arrayList.get(position));
+                                    ArrayList info = new ArrayList();
+
+                                    try {
+                                        JSONObject main2 = response.getJSONObject(position);
+                                        info.add(main2.getString("created_at"));
+                                        info.add(main2.getString("company"));
+                                        info.add(main2.getString("location"));
+                                        info.add(main2.getString("title"));
+                                        info.add(main2.getString("description"));
+                                        //ajouter un bool pour le bouton de truc de ces grands morts
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    openActivityDetails(info);
                                 }
                             });
 
@@ -117,9 +131,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void openActivityDetails(String s) {
+    private void openActivityDetails(ArrayList info) {
         Intent intent = new Intent(this, details.class);
-        intent.putExtra(EXTRA_TEXT,s);
+        intent.putStringArrayListExtra("info",new ArrayList<>(info));
+        Log.e("info :", info.toString());
         startActivity(intent);
     }
 
