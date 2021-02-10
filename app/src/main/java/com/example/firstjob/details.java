@@ -60,7 +60,7 @@ public class details extends AppCompatActivity {
 
 
     private void openActivity(){
-        Intent intent = new Intent(this,form.class);
+        Intent intent = new Intent(this, FormActivity.class);
         startActivity(intent);
     }
 
