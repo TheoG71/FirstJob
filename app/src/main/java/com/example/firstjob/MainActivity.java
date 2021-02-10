@@ -13,6 +13,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.stevesoltys.indeed.Indeed;
+import com.stevesoltys.indeed.exception.IndeedParameterException;
+import com.stevesoltys.indeed.exception.IndeedParseException;
+import com.stevesoltys.indeed.model.IndeedResult;
+import com.stevesoltys.indeed.model.IndeedSearchResults;
+
+import java.io.IOException;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -52,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String selected = dropdown.getSelectedItem().toString();
                 TextView txt = (TextView) findViewById(R.id.test);
-                txt.setText(selected);
+                txt.setText("Salut");
+
             }
         });
     }
