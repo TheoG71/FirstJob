@@ -2,7 +2,6 @@ package com.example.firstjob;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -21,24 +19,17 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.stevesoltys.indeed.Indeed;
-import com.stevesoltys.indeed.exception.IndeedParameterException;
-import com.stevesoltys.indeed.exception.IndeedParseException;
-import com.stevesoltys.indeed.model.IndeedResult;
-import com.stevesoltys.indeed.model.IndeedSearchResults;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+        public  static final String EXTRA_TEXT= "com.example.application.example.EXTRA_TEXT";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +40,6 @@ public class MainActivity extends AppCompatActivity {
         Button btn_D = (Button) findViewById(R.id.btn_details);
         Button btn_A = (Button) findViewById(R.id.btn_answer);
 
-        btn_D.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openActivityDetails();
-            }
-        });
 
 
         btn_A.setOnClickListener(new View.OnClickListener() {
@@ -93,12 +78,24 @@ public class MainActivity extends AppCompatActivity {
 
 
                         try {
-
-                            JSONObject main2 = response.getJSONObject(0);
-                            title.setText(String.valueOf(main2.getString("title")));
-                            desc.setText(String.valueOf(main2.getString("description"))+"...");
+                            ListView listView = (ListView)findViewById(R.id.list);
+                            ArrayList<String> arrayList = new ArrayList<>();
 
 
+                            for (int i=0;i < response.length() ;i++){
+                                JSONObject main = response.getJSONObject(i);
+                                arrayList.add(main.getString("title"));
+                            }
+
+                            ArrayAdapter arrayAdapter = new ArrayAdapter(MainActivity.this,android.R.layout.simple_list_item_1,arrayList);
+                            listView.setAdapter(arrayAdapter);
+
+                            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    openActivityDetails(arrayList.get(position));
+                                }
+                            });
 
                         } catch (JSONException e) {
                             txt.setText("j'ai rien");
@@ -120,8 +117,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void openActivityDetails() {
+    private void openActivityDetails(String s) {
         Intent intent = new Intent(this, details.class);
+        intent.putExtra(EXTRA_TEXT,s);
         startActivity(intent);
     }
 
