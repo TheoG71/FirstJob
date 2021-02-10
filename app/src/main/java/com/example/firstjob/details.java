@@ -15,7 +15,7 @@ public class details extends AppCompatActivity {
         setContentView(R.layout.activity_details);
 
         Button btn = (Button) findViewById(R.id.btn_post);
-
+        //test test test //
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
