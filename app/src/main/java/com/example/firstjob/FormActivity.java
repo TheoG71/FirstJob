@@ -32,7 +32,6 @@ public class FormActivity extends AppCompatActivity {
         setContentView(R.layout.activity_form);
 
         Button btn = (Button) findViewById(R.id.btn_send);
-        Button files = (Button) findViewById(R.id.open_files);
         EditText name = (EditText) findViewById(R.id.name);
         EditText first_name = (EditText) findViewById(R.id.first_name);
         EditText age = (EditText) findViewById(R.id.age);
