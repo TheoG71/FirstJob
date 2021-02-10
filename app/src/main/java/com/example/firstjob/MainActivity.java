@@ -2,12 +2,25 @@ package com.example.firstjob;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.stevesoltys.indeed.Indeed;
+import com.stevesoltys.indeed.exception.IndeedParameterException;
+import com.stevesoltys.indeed.exception.IndeedParseException;
+import com.stevesoltys.indeed.model.IndeedResult;
+import com.stevesoltys.indeed.model.IndeedSearchResults;
+
+import java.io.IOException;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,16 +47,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //get the spinner from the xml.
         Spinner dropdown = findViewById(R.id.category);
-        //create a list of items for the spinner.
-        String[] items = new String[]{"Agriculture", "Soutien scolaire", "Aide senior", "Magasin", "", "Baby sitter", "Serveur", "Pet sitter"};
-        //create an adapter to describe how the items are displayed, adapters are used in several places in android.
-        //There are multiple variations of this, but this is the basic variant.
+        String[] items = new String[]{"Agriculture", "Soutien scolaire", "Aide senior", "Magasin", "Livreur", "Baby sitter", "Serveur", "Pet sitter"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
-        //set the spinners adapter to the previously created one.
+        dropdown.setSelection(0);
         dropdown.setAdapter(adapter);
 
+
+        Button btn_getJobs = (Button) findViewById(R.id.actu);
+
+        btn_getJobs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String selected = dropdown.getSelectedItem().toString();
+                TextView txt = (TextView) findViewById(R.id.test);
+                txt.setText("Salut");
+
+            }
+        });
     }
 
     private void openActivityDetails(){
