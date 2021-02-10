@@ -65,11 +65,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Spinner dropdown = findViewById(R.id.category);
-        String[] items = new String[]{"Agriculture", "Soutien scolaire", "Aide senior", "Magasin", "Livreur", "Baby sitter", "Serveur", "Pet sitter"};
+        String[] items = new String[]{"front", "front", "back", "Magasin", "Livreur", "Baby sitter", "Serveur", "Pet sitter"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setSelection(0);
         dropdown.setAdapter(adapter);
-
 
         Button btn_getJobs = (Button) findViewById(R.id.actu);
 
@@ -77,27 +76,46 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String selected = dropdown.getSelectedItem().toString();
-                ListView lv = (ListView) findViewById(R.id.list);
+
+                TextView txt = (TextView) findViewById(R.id.test);
+                TextView title = (TextView) findViewById(R.id.title);
+                TextView desc = (TextView) findViewById(R.id.desc);
 
                 String URL = "https://jobs.github.com/positions.json?description=" + selected;
+
 
                 RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
                 JsonArrayRequest objectRequest = new JsonArrayRequest(
                         Request.Method.GET, URL, null, new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Log.e("Rest Response", response.toString());
 
-                        //a changer !
+
+                        try {
+
+                            JSONObject main2 = response.getJSONObject(0);
+                            title.setText(String.valueOf(main2.getString("title")));
+                            desc.setText(String.valueOf(main2.getString("description"))+"...");
+
+
+
+                        } catch (JSONException e) {
+                            txt.setText("j'ai rien");
+                            Toast.makeText(MainActivity.this, "j'ai rien recu", Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        }
 
 
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        Log.e("Rest Response", error.toString());
                     }
                 }
                 );
+                requestQueue.add(objectRequest);
             }
         });
     }
