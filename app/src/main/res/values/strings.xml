@@ -11,4 +11,6 @@
     <string name="go_back">Go Back</string>
     <string name="test1">test1</string>
     <string name="cv">CV</string>
+    <string name="item_default_name">Nom de l\'article</string>
+    <string name="item_default_price">0€</string>
 </resources>

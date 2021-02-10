@@ -2,16 +2,12 @@ package com.example.firstjob;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,22 +17,11 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.stevesoltys.indeed.Indeed;
-import com.stevesoltys.indeed.exception.IndeedParameterException;
-import com.stevesoltys.indeed.exception.IndeedParseException;
-import com.stevesoltys.indeed.model.IndeedResult;
-import com.stevesoltys.indeed.model.IndeedSearchResults;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -126,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openActivityAnswer() {
-        Intent intent = new Intent(this, answer.class);
+        Intent intent = new Intent(this, AnswerActivity.class);
         startActivity(intent);
     }
 
