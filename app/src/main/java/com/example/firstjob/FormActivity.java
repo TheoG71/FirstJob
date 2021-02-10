@@ -77,7 +77,6 @@ public class FormActivity extends AppCompatActivity {
         boolean rand = rd.nextBoolean();
         String res = String.valueOf(rand);
         TextView test = (TextView) findViewById(R.id.test);
-        test.setText(res);
         ArrayList<String> arrayDetails = new ArrayList<String>();
         arrayDetails.add(res);
         test.setText(String.valueOf(arrayDetails));
