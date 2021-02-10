@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,7 +25,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
+        public static final String EXTRA_TEXT= "com.example.application.example.EXTRA_TEXT";
+    JSONObject main;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +41,6 @@ public class MainActivity extends AppCompatActivity {
         Button btn_D = (Button) findViewById(R.id.btn_details);
         Button btn_A = (Button) findViewById(R.id.btn_answer);
 
-        btn_D.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openActivityDetails();
-            }
-        });
 
 
         btn_A.setOnClickListener(new View.OnClickListener() {
@@ -78,12 +79,37 @@ public class MainActivity extends AppCompatActivity {
 
 
                         try {
-
-                            JSONObject main2 = response.getJSONObject(0);
-                            title.setText(String.valueOf(main2.getString("title")));
-                            desc.setText(String.valueOf(main2.getString("description"))+"...");
+                            ListView listView = (ListView)findViewById(R.id.list);
+                            ArrayList<String> arrayList = new ArrayList<>();
 
 
+                            for (int i=0;i < response.length() ;i++){
+                                main = response.getJSONObject(i);
+                                arrayList.add(main.getString("title"));
+                            }
+
+                            ArrayAdapter arrayAdapter = new ArrayAdapter(MainActivity.this,android.R.layout.simple_list_item_1,arrayList);
+                            listView.setAdapter(arrayAdapter);
+
+                            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    ArrayList info = new ArrayList();
+
+                                    try {
+                                        JSONObject main2 = response.getJSONObject(position);
+                                        info.add(main2.getString("created_at"));
+                                        info.add(main2.getString("company"));
+                                        info.add(main2.getString("location"));
+                                        info.add(main2.getString("title"));
+                                        info.add(main2.getString("description"));
+                                        //ajouter un bool pour le bouton de truc de ces grands morts
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    openActivityDetails(info);
+                                }
+                            });
 
                         } catch (JSONException e) {
                             txt.setText("j'ai rien");
@@ -105,8 +131,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void openActivityDetails() {
+    private void openActivityDetails(ArrayList info) {
         Intent intent = new Intent(this, details.class);
+        intent.putStringArrayListExtra("info",new ArrayList<>(info));
+        Log.e("info :", info.toString());
         startActivity(intent);
     }
 
