@@ -12,6 +12,7 @@
         android:layout_marginTop="20dp"
         android:orientation="vertical"
         >
+
     </TextView>
 
     <TextView
@@ -24,6 +25,4 @@
         >
 
     </TextView>
-
-
 </LinearLayout>
