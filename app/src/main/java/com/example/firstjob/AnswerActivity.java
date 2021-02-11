@@ -32,24 +32,20 @@ import java.util.List;
 import java.util.Scanner;
 
 public class AnswerActivity extends AppCompatActivity {
-// Voici un commentaire pour pouvoir push
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answer);
-
-
         ArrayList tmp = new ArrayList();
-
 
         try {
             tmp = getArray();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        //Creation de l'ArrayList 2D
 
-        //ArrayList 2D
         ArrayList<ArrayList<String>> sectionList = new ArrayList();
 
         ArrayList<String> title = new ArrayList();
@@ -58,35 +54,28 @@ public class AnswerActivity extends AppCompatActivity {
 
         int j = 0;
 
-        Log.e("taille ", String.valueOf(tmp.size()));
-
-
         for (int i = 3; i < tmp.size(); i+=6){
-            Log.e("i ", String.valueOf(i));
             title.add((String) tmp.get(i));
-            Log.e("title ", String.valueOf(tmp.get(i)));
         }
 
         for (int i = 4; i < tmp.size(); i+=6){
-            Log.e("i ", String.valueOf(i));
-            content.add(((String) tmp.get(i)).substring(0,20));
-            Log.e("content ", String.valueOf(tmp.get(i)));
+            content.add(((String) tmp.get(i)).substring(0,250));
         }
 
         for (int i = 5; i < tmp.size(); i+=6){
-            Log.e("i ", String.valueOf(i));
             hired.add((String) tmp.get(i));
-            Log.e("hired ", String.valueOf(tmp.get(i)));
             j++;
         }
 
         sectionList.add(title);
         sectionList.add(content);
         sectionList.add(hired);
+        //Fin de creation de l'ArrayList 2D
 
         //List of items
         List<AnswerItem> answerItemList = new ArrayList<>();
 
+        //Envoi des éléments dans la vue
         for (int i = 0; i < j; i++) {
             if (sectionList.get(2).get(i).equals("true")){
                 answerItemList.add(new AnswerItem(sectionList.get(0).get(i), sectionList.get(1).get(i), sectionList.get(2).get(i), "Accepted"));
@@ -100,12 +89,11 @@ public class AnswerActivity extends AppCompatActivity {
         listView.setAdapter(new AnswerItemAdapter(this, answerItemList));
     }
 
+    //Reception des données à afficher grâce à un fichier txt
     private ArrayList getArray() throws FileNotFoundException {
         String filename = "myfile.txt";
 
-
         ArrayList load = new ArrayList();
-
 
         FileInputStream fis = null;
         try {
@@ -115,15 +103,9 @@ public class AnswerActivity extends AppCompatActivity {
             StringBuilder sb = new StringBuilder();
             String text;
 
-
-
             while ((text = br.readLine()) != null){
-
-                //sb.append(text).append("\n");
                 load.add(text);
-
             }
-            Log.e("aller ", sb.toString());
         }catch (FileNotFoundException e) {
             e.printStackTrace();
         }catch (IOException e) {

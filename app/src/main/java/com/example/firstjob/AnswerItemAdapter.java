@@ -52,7 +52,7 @@ public class AnswerItemAdapter extends BaseAdapter{
 
         view = inflater.inflate(R.layout.adapter_item, null);
 
-        //get informations about item
+        //get information about item
         AnswerItem currentItem = getItem(i);
         String itemTitle = currentItem.getTitle();
         String itemContent = currentItem.getContent();
@@ -71,16 +71,11 @@ public class AnswerItemAdapter extends BaseAdapter{
         TextView itemResponseView = view.findViewById(R.id.item_response);
         itemResponseView.setText(itemResponse);
 
-        //get item hired view
-//        RelativeLayout itemHiredView = view.findViewById(R.id.item_hired);
-
-        //Sets the color of the response
+        //Sets the color of the response text
         if (itemHired.equals("true")){
             itemResponseView.setTextColor(Color.GREEN);
-//            itemHiredView.setBackgroundResource(R.color.accepted);
         }else{
             itemResponseView.setTextColor(Color.RED);
-//            itemHiredView.setBackgroundResource(R.color.refused);
         }
 
         return view;
