@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -132,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openActivityDetails(ArrayList info) {
-        Intent intent = new Intent(this, details.class);
+        Intent intent = new Intent(this, DetailsActivity.class);
         intent.putStringArrayListExtra("info",new ArrayList<>(info));
         Log.e("info :", info.toString());
         startActivity(intent);
