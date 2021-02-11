@@ -39,21 +39,6 @@ public class AnswerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answer);
 
-        Button btn_delete = (Button) findViewById(R.id.btn_delete);
-        btn_delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String filename = "myfile.txt";
-                File file = new File(filename);
-                if (file.delete()){
-                    Toast.makeText(AnswerActivity.this, "Deleted the file", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(AnswerActivity.this, "Failed to delete the file.", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-
 
         ArrayList tmp = new ArrayList();
 
@@ -154,7 +139,6 @@ public class AnswerActivity extends AppCompatActivity {
                 }
             }
         }
-
 
         return load;
 

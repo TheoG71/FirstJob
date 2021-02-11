@@ -27,6 +27,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.example.firstjob.adapters.AnswerItemAdapter;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,8 +47,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button mButtonAnswer = (Button) findViewById(R.id.btn_answer);
-
-
 
         mButtonAnswer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,8 +147,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openActivityAnswer() {
-        Intent intent = new Intent(this, AnswerActivity.class);
-        startActivity(intent);
+        String filename = "myfile.txt";
+        FileInputStream fis = null;
+        try {
+            fis = openFileInput(filename);
+            InputStreamReader ist = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(ist);
+            if (br.readLine() == null){
+                Toast.makeText(this, "You have to postulate", Toast.LENGTH_SHORT).show();
+            }else{
+
+                Intent intent = new Intent(this, AnswerActivity.class);
+                startActivity(intent);
+            }
+        }catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 }
