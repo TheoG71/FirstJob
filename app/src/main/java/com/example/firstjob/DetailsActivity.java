@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ public class DetailsActivity extends AppCompatActivity {
 
 
     private ArrayList<String> details  = new ArrayList();
+
     {
 
         details.add(mDate);
@@ -61,9 +64,10 @@ public class DetailsActivity extends AppCompatActivity {
         TextView name = (TextView)findViewById(R.id.name);
         name.setText(String.valueOf(mTitle));
         TextView information = (TextView)findViewById(R.id.information);
-        mDescription = mDescription.substring(3,350);
+        mDescription = mDescription.substring(3);
         mDescription = mDescription.replaceAll("\\<.*?>", "");
         information.setText(String.valueOf(mDescription));
+        information.setMovementMethod(new ScrollingMovementMethod());
 
         Button btn = (Button) findViewById(R.id.btn_post);
         //test test test //
