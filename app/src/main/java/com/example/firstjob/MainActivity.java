@@ -40,12 +40,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button btn_D = (Button) findViewById(R.id.btn_details);
-        Button btn_A = (Button) findViewById(R.id.btn_answer);
+        Button mButtonAnswer = (Button) findViewById(R.id.btn_answer);
 
 
 
-        btn_A.setOnClickListener(new View.OnClickListener() {
+        mButtonAnswer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openActivityAnswer();
@@ -53,35 +52,31 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Spinner dropdown = findViewById(R.id.category);
-        String[] items = new String[]{"front", "front", "back", "Magasin", "Livreur", "Baby sitter", "Serveur", "Pet sitter"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        String[] mItems = new String[]{"Front-End", "Back-End", "Full Stack", "Java", "C/C++", "Server", "Python"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, mItems);
         dropdown.setSelection(0);
         dropdown.setAdapter(adapter);
 
-        Button btn_getJobs = (Button) findViewById(R.id.actu);
+        Button mButtonGetJobs = (Button) findViewById(R.id.actu);
 
-        btn_getJobs.setOnClickListener(new View.OnClickListener() {
+        mButtonGetJobs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String selected = dropdown.getSelectedItem().toString();
+                String mValueSelected = dropdown.getSelectedItem().toString();
 
-                TextView txt = (TextView) findViewById(R.id.test);
-                TextView title = (TextView) findViewById(R.id.title);
-                TextView desc = (TextView) findViewById(R.id.desc);
-
-                String URL = "https://jobs.github.com/positions.json?description=" + selected;
+                String mURL = "https://jobs.github.com/positions.json?description=" + mValueSelected;
 
 
                 RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
                 JsonArrayRequest objectRequest = new JsonArrayRequest(
-                        Request.Method.GET, URL, null, new Response.Listener<JSONArray>() {
+                        Request.Method.GET, mURL, null, new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         Log.e("Rest Response", response.toString());
 
 
                         try {
-                            List<AnswerItem> answerItemList = new ArrayList<>();
+                            List<AnswerItem> mAnswerItemList = new ArrayList<>();
 
                             ListView listView = (ListView)findViewById(R.id.list);
                             //ArrayList<String> arrayList = new ArrayList<>();
@@ -90,15 +85,16 @@ public class MainActivity extends AppCompatActivity {
                             for (int i=0;i < response.length() ;i++){
                                 main = response.getJSONObject(i);
                                 String desc = main.getString("description");
+                                desc = desc.replaceAll("\\<.*?>", "");
                                 desc = desc.substring(0,50);
                                 desc += "...";
-                                answerItemList.add(new AnswerItem(main.getString("title"), desc));
+                                mAnswerItemList.add(new AnswerItem(main.getString("title"), desc));
                                 //arrayList.add(main.getString("title"));
                             }
 
                             //ArrayAdapter arrayAdapter = new ArrayAdapter(MainActivity.this,android.R.layout.simple_list_item_1,arrayList);
                             //listView.setAdapter(arrayAdapter);
-                            listView.setAdapter(new AnswerItemAdapter(MainActivity.this, answerItemList));
+                            listView.setAdapter(new AnswerItemAdapter(MainActivity.this, mAnswerItemList));
 
                             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
@@ -106,12 +102,12 @@ public class MainActivity extends AppCompatActivity {
                                     ArrayList info = new ArrayList();
 
                                     try {
-                                        JSONObject main2 = response.getJSONObject(position);
-                                        info.add(main2.getString("created_at"));
-                                        info.add(main2.getString("company"));
-                                        info.add(main2.getString("location"));
-                                        info.add(main2.getString("title"));
-                                        info.add(main2.getString("description"));
+                                        JSONObject mInfoAPI = response.getJSONObject(position);
+                                        info.add(mInfoAPI.getString("created_at"));
+                                        info.add(mInfoAPI.getString("company"));
+                                        info.add(mInfoAPI.getString("location"));
+                                        info.add(mInfoAPI.getString("title"));
+                                        info.add(mInfoAPI.getString("description"));
                                         //ajouter un bool pour le bouton de truc de ces grands morts
                                     } catch (JSONException e) {
                                         e.printStackTrace();
@@ -121,7 +117,6 @@ public class MainActivity extends AppCompatActivity {
                             });
 
                         } catch (JSONException e) {
-                            txt.setText("j'ai rien");
                             Toast.makeText(MainActivity.this, "j'ai rien recu", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
