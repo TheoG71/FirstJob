@@ -49,8 +49,6 @@ public class AnswerActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
-
         //ArrayList 2D
         ArrayList<ArrayList<String>> sectionList = new ArrayList();
 
