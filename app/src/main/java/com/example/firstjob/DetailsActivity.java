@@ -61,8 +61,8 @@ public class DetailsActivity extends AppCompatActivity {
         TextView name = (TextView)findViewById(R.id.name);
         name.setText(String.valueOf(mTitle));
         TextView information = (TextView)findViewById(R.id.information);
-        mDescription = mDescription.substring(1,350);
-        Jsoup.parse(mDescription).text();
+        mDescription = mDescription.substring(3,350);
+        mDescription = mDescription.replaceAll("\\<.*?>", "");
         information.setText(String.valueOf(mDescription));
 
         Button btn = (Button) findViewById(R.id.btn_post);
@@ -71,13 +71,13 @@ public class DetailsActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openActivity(); }
+                openActivity(reception);}
         });
 
 
     }
 
-    private void openActivity(){
+    private void openActivity(ArrayList details){
         Intent intent = new Intent(this, FormActivity.class);
         intent.putStringArrayListExtra("details",new ArrayList<>(details));
         startActivity(intent);
