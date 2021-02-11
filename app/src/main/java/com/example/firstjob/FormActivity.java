@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -30,8 +31,6 @@ import java.lang.*;
 
 public class FormActivity extends AppCompatActivity {
 
-    private static final String FILE_NAME="My_Post_List.txt";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +52,6 @@ public class FormActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //appel fonc qui ckeck les données un bool true false
-
                 if (TextUtils.isEmpty(name.getText())) {
                     name.setError("Name is required!");
                 }
@@ -86,18 +83,7 @@ public class FormActivity extends AppCompatActivity {
     private void closeActivity() throws IOException {
 
         save(getArrayFromDetails());
-
-
         finish();
-
-
-
-        FileOutputStream outputStream = openFileOutput(FILE_NAME,MODE_PRIVATE);
-        String files="";
-        outputStream.write(files.getBytes());
-        outputStream.close();
-        FileInputStream inputStream =openFileInput(FILE_NAME);
-
 
     }
 
@@ -110,41 +96,33 @@ public class FormActivity extends AppCompatActivity {
 
     }
 
-    //rename value
-    private void save(ArrayList<String> value) throws IOException {
-        FileInputStream inputStream = openFileInput(FILE_NAME);
-        FileOutputStream outputStream = openFileOutput(FILE_NAME,MODE_PRIVATE);
 
-        if (inputStream.read() < 1){
+    private void save(ArrayList<String> reception) {
+        String filename = "myfile.txt";
+        String end = "@@@";
+        FileOutputStream outputStream;
+        try {
+            outputStream = openFileOutput(filename, Context.MODE_APPEND);
 
-            String files=String.valueOf(value);
-            outputStream.write(files.getBytes());
+            for (String s : reception) {
+                outputStream.write(s.getBytes());
 
-        }else{
-            StringBuilder stringb = new StringBuilder();
-
-            String essai = "";
-            int content;
-            while ((content=inputStream.read())!=-1){
-                essai = String.valueOf(stringb.append((char)content));
             }
-            value.add(essai);
-            String files=String.valueOf(value);
-            outputStream.write(files.getBytes());
-
+            outputStream.write(end.getBytes());
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        outputStream.close();
-        inputStream.close();
+
 
         Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show();
     }
 
 
     private boolean getRandom(){
-        //renommer les variable
-        Random rd = new Random();
-        boolean rand = rd.nextBoolean();
-        return rand;
+        Random randomNumber = new Random();
+        boolean randomBoolean = randomNumber.nextBoolean();
+        return randomBoolean;
     }
 
 
