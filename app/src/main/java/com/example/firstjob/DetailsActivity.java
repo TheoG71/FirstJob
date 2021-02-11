@@ -36,7 +36,6 @@ public class DetailsActivity extends AppCompatActivity {
         details.add(mLocation);
         details.add(mTitle);
         details.add(mDescription);
-        Log.e("Coucou",details.toString());
 
     }
 
@@ -46,6 +45,7 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
+        //Reception of the ArrayList info  which is then stored in a new ArrayList called reception.
         ArrayList<String> reception = getIntent().getStringArrayListExtra("info");
 
 
@@ -55,6 +55,7 @@ public class DetailsActivity extends AppCompatActivity {
         mTitle = reception.get(3);
         mDescription = reception.get(4);
 
+        //create TextView
         TextView created_at = (TextView)findViewById(R.id.created_at);
         created_at.setText(String.valueOf(mDate));
         TextView comp = (TextView)findViewById(R.id.comp);
@@ -65,12 +66,14 @@ public class DetailsActivity extends AppCompatActivity {
         name.setText(String.valueOf(mTitle));
         TextView information = (TextView)findViewById(R.id.information);
         mDescription = mDescription.substring(3);
+        
+        //translate the description into html
         mDescription = mDescription.replaceAll("\\<.*?>", "");
         information.setText(String.valueOf(mDescription));
         information.setMovementMethod(new ScrollingMovementMethod());
 
         Button btn = (Button) findViewById(R.id.btn_post);
-        //test test test //
+
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +85,7 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     private void openActivity(ArrayList details){
+        //Sending ArrayList to FormActivity by storing it in a new ArrayList
         Intent intent = new Intent(this, FormActivity.class);
         intent.putStringArrayListExtra("details",new ArrayList<>(details));
         startActivity(intent);
