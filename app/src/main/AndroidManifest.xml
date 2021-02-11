@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FirstJob">
         <activity android:name=".FormActivity"></activity>
-        <activity android:name=".details" android:parentActivityName=".MainActivity"/>
+        <activity android:name=".DetailsActivity" android:parentActivityName=".MainActivity"/>
         <activity android:name=".AnswerActivity" />
 
         <activity android:name=".MainActivity">
