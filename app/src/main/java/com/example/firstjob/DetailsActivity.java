@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import android.util.Log;
+
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -12,7 +14,6 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 public class DetailsActivity extends AppCompatActivity {
-
     String date;
     String company;
     String location;
@@ -30,6 +31,7 @@ public class DetailsActivity extends AppCompatActivity {
         details.add(title);
         details.add(description);
         Log.e("Coucou",details.toString());
+
     }
 
 
@@ -37,6 +39,7 @@ public class DetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
+
         ArrayList<String> reception = getIntent().getStringArrayListExtra("info");
         mListView = (ListView) findViewById(R.id.listView);
 
@@ -47,6 +50,7 @@ public class DetailsActivity extends AppCompatActivity {
         description = reception.get(4);
 
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(DetailsActivity.this,android.R.layout.simple_list_item_1, android.R.id.text1, details);
+
         mListView.setAdapter(adapter);
 
         Button btn = (Button) findViewById(R.id.btn_post);
@@ -60,8 +64,6 @@ public class DetailsActivity extends AppCompatActivity {
 
 
     }
-
-
 
     private void openActivity(){
         Intent intent = new Intent(this, FormActivity.class);

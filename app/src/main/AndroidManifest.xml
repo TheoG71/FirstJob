@@ -13,7 +13,6 @@
         <activity android:name=".FormActivity"></activity>
         <activity android:name=".DetailsActivity" android:parentActivityName=".MainActivity"/>
         <activity android:name=".AnswerActivity" android:parentActivityName=".DetailsActivity"/>
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
