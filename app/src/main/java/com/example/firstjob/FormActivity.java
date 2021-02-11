@@ -10,20 +10,27 @@ import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 import java.lang.*;
 
 public class FormActivity extends AppCompatActivity {
+
+    private static final String FILE_NAME="My_Post_List.txt";
 
 
     @Override
@@ -46,6 +53,8 @@ public class FormActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //appel fonc qui ckeck les données un bool true false
+
                 if (TextUtils.isEmpty(name.getText())) {
                     name.setError("Name is required!");
                 }
@@ -64,24 +73,80 @@ public class FormActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(phone.getText())) {
                     phone.setError("Phone is required!");
                 } else {
-                    openActivity();
+                    try {
+                        closeActivity();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
     }
 
+    private void closeActivity() throws IOException {
 
-    private void openActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
+        save(getArrayFromDetails());
+
+
+        finish();
+
+
+
+        FileOutputStream outputStream = openFileOutput(FILE_NAME,MODE_PRIVATE);
+        String files="";
+        outputStream.write(files.getBytes());
+        outputStream.close();
+        FileInputStream inputStream =openFileInput(FILE_NAME);
+
+
+    }
+
+    private ArrayList getArrayFromDetails() {
+
+        ArrayList<String> reception = getIntent().getStringArrayListExtra("details");
+        reception.add(String.valueOf(getRandom()));
+
+        return reception;
+
+    }
+
+    //rename value
+    private void save(ArrayList<String> value) throws IOException {
+        FileInputStream inputStream = openFileInput(FILE_NAME);
+        FileOutputStream outputStream = openFileOutput(FILE_NAME,MODE_PRIVATE);
+
+        if (inputStream.read() < 1){
+
+            String files=String.valueOf(value);
+            outputStream.write(files.getBytes());
+
+        }else{
+            StringBuilder stringb = new StringBuilder();
+
+            String essai = "";
+            int content;
+            while ((content=inputStream.read())!=-1){
+                essai = String.valueOf(stringb.append((char)content));
+            }
+            value.add(essai);
+            String files=String.valueOf(value);
+            outputStream.write(files.getBytes());
+
+        }
+        outputStream.close();
+        inputStream.close();
+
+        Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show();
+    }
+
+
+    private boolean getRandom(){
+        //renommer les variable
         Random rd = new Random();
         boolean rand = rd.nextBoolean();
-        String res = String.valueOf(rand);
-        TextView test = (TextView) findViewById(R.id.test);
-        ArrayList<String> arrayDetails = new ArrayList<String>();
-        arrayDetails.add(res);
-        test.setText(String.valueOf(arrayDetails));
-        //startActivity(intent);
+        return rand;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
