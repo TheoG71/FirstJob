@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -100,12 +101,16 @@ public class FormActivity extends AppCompatActivity {
     private void save(ArrayList<String> reception) {
         String filename = "myfile.txt";
         String end = "@@@";
+        String coup = "\n";
         FileOutputStream outputStream;
+        Log.e("Taille de recpetion", String.valueOf(reception.size()));
+
         try {
             outputStream = openFileOutput(filename, Context.MODE_APPEND);
 
-            for (String s : reception) {
-                outputStream.write(s.getBytes());
+            for (int i = 0; reception.size() > i ; i++) {
+                outputStream.write(reception.get(i).getBytes());
+                outputStream.write(coup.getBytes());
 
             }
             outputStream.write(end.getBytes());
