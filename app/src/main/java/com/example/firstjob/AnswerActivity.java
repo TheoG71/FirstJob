@@ -2,6 +2,7 @@ package com.example.firstjob;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -72,9 +73,19 @@ public class AnswerActivity extends AppCompatActivity {
 
     private ArrayList getArray() {
         ArrayList load = new ArrayList();
-        File file = new File("myfile.txt");
 
-        //le fichier myfile.txt et mettre dans
+        try {
+            File myObj = new File("");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                Log.e("info :", data);
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
 
 
         return load;

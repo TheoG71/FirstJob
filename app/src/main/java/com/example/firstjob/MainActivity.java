@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
     private void openActivityDetails(ArrayList info) {
         Intent intent = new Intent(this, DetailsActivity.class);
         intent.putStringArrayListExtra("info",new ArrayList<>(info));
-        Log.e("info :", info.toString());
+        //Log.e("info :", info.toString());
         startActivity(intent);
     }
 
