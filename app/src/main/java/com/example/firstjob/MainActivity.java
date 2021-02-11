@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                                 desc = desc.replaceAll("\\<.*?>", "");
                                 desc = desc.substring(0,50);
                                 desc += "...";
-                                mAnswerItemList.add(new AnswerItem(main.getString("title"), desc));
+                                mAnswerItemList.add(new AnswerItem(main.getString("title"), desc,"",""));
                                 //arrayList.add(main.getString("title"));
                             }
 

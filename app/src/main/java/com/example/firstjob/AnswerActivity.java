@@ -1,9 +1,13 @@
 package com.example.firstjob;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.firstjob.adapters.AnswerItemAdapter;
 
@@ -31,21 +35,25 @@ public class AnswerActivity extends AppCompatActivity {
         content.add("content number 2 let's add some text to make a way better looking render on our beautiful application, but a lil' different so we have some diversity");
         content.add("content number 3 let's add some shit to this announce displayer, it looks stunning !");
 
+        ArrayList<String> hired = new ArrayList();
+        hired.add("true");
+        hired.add("refused");
+        hired.add("refused2");
+
         sectionList.add(title);
         sectionList.add(content);
-
-        int listSize = sectionList.size() + 1;
+        sectionList.add(hired);
 
         //List of items
         List<AnswerItem> answerItemList = new ArrayList<>();
 
-        for (int i = 0; i < listSize; i++) {
-            answerItemList.add(new AnswerItem(sectionList.get(0).get(i), sectionList.get(1).get(i)));
+        for (int i = 0; i < sectionList.size(); i++) {
+            if (sectionList.get(2).get(i).equals("true")){
+                answerItemList.add(new AnswerItem(sectionList.get(0).get(i), sectionList.get(1).get(i), sectionList.get(2).get(i), "Accepted"));
+            }else{
+                answerItemList.add(new AnswerItem(sectionList.get(0).get(i), sectionList.get(1).get(i), sectionList.get(2).get(i), "Declined"));
+            }
         }
-
-//        answerItemList.add(new AnswerItem("titre1", "content1"));
-//        answerItemList.add(new AnswerItem("titre2", "content2"));
-//        answerItemList.add(new AnswerItem("titre3", "content3"));
 
         //get list view
         ListView listView = findViewById(R.id.list_view);
