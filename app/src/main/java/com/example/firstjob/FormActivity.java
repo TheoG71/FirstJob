@@ -100,7 +100,6 @@ public class FormActivity extends AppCompatActivity {
 
     private void save(ArrayList<String> reception) {
         String filename = "myfile.txt";
-        String end = "@@@";
         String coup = "\n";
         FileOutputStream outputStream;
         Log.e("Taille de recpetion", String.valueOf(reception.size()));
@@ -113,7 +112,6 @@ public class FormActivity extends AppCompatActivity {
                 outputStream.write(coup.getBytes());
 
             }
-            outputStream.write(end.getBytes());
             outputStream.close();
         } catch (Exception e) {
             e.printStackTrace();

@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                                         info.add(mInfoAPI.getString("company"));
                                         info.add(mInfoAPI.getString("location"));
                                         info.add(mInfoAPI.getString("title"));
-                                        info.add(mInfoAPI.getString("description"));
+                                        info.add(mInfoAPI.getString("description").replaceAll("\\\n", " ").replaceAll("\\<.*?>", ""));
                                         //ajouter un bool pour le bouton de truc de ces grands morts
                                     } catch (JSONException e) {
                                         e.printStackTrace();
@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
     private void openActivityDetails(ArrayList info) {
         Intent intent = new Intent(this, DetailsActivity.class);
         intent.putStringArrayListExtra("info",new ArrayList<>(info));
-        //Log.e("info :", info.toString());
+        Log.e("info :", info.toString());
         startActivity(intent);
     }
 

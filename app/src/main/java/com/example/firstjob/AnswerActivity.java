@@ -50,21 +50,22 @@ public class AnswerActivity extends AppCompatActivity {
         ArrayList<ArrayList<String>> sectionList = new ArrayList();
 
         ArrayList<String> title = new ArrayList();
-        title.add((String) tmp.get(3));
-
-        //title.add("Web developper");
-        //title.add("Projet manager");
-        //title.add("Marketing manager");
-
         ArrayList<String> content = new ArrayList();
-        //content.add("content number 1 let's add some text to make a way better looking render on our beautiful application");
-        //content.add("content number 2 let's add some text to make a way better looking render on our beautiful application, but a lil' different so we have some diversity");
-        //content.add("content number 3 let's add some shit to this announce displayer, it looks stunning !");
-
         ArrayList<String> hired = new ArrayList();
-        //hired.add("true");
-        //hired.add("refused");
-        //hired.add("refused2");
+
+        for (int i = 3; i < tmp.size(); i+=5){
+            title.add((String) tmp.get(i));
+            Log.e("NB ", String.valueOf(tmp.size()));
+        }
+
+        for (int i = 4; i < tmp.size(); i+=5){
+            content.add(((String) tmp.get(i)).substring(0,20));
+        }
+
+        for (int i = 5; i < tmp.size(); i+=5){
+            hired.add((String) tmp.get(i));
+            Log.e("NB ", String.valueOf(tmp.get(i)));
+        }
 
         sectionList.add(title);
         sectionList.add(content);
@@ -73,7 +74,7 @@ public class AnswerActivity extends AppCompatActivity {
         //List of items
         List<AnswerItem> answerItemList = new ArrayList<>();
 
-        for (int i = 0; i < sectionList.size(); i++) {
+        for (int i = 0; i < sectionList.size() - 2; i++) {
             if (sectionList.get(2).get(i).equals("true")){
                 answerItemList.add(new AnswerItem(sectionList.get(0).get(i), sectionList.get(1).get(i), sectionList.get(2).get(i), "Accepted"));
             }else{
