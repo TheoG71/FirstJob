@@ -37,7 +37,6 @@ public class AnswerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answer);
-
         ArrayList tmp = new ArrayList();
 
         try {
@@ -45,8 +44,8 @@ public class AnswerActivity extends AppCompatActivity {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
         //Creation de l'ArrayList 2D
+
         ArrayList<ArrayList<String>> sectionList = new ArrayList();
 
         ArrayList<String> title = new ArrayList();
