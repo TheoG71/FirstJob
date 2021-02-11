@@ -22,20 +22,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="30dp"
-                android:text="Bonjour"
+                android:text="@string/hello"
                 android:layout_gravity="center"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Bienvenue sur FirstJob"
+                android:text="@string/welcome"
                 android:textSize="20dp"
                 android:layout_gravity="center"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Choisissez une catégorie"
+                android:text="@string/choice"
                 android:textSize="15dp"
                 android:layout_gravity="center"
                 />
@@ -70,7 +70,7 @@
         android:id="@+id/actu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Get jobs"/>
+        android:text="@string/btn_job"/>
 
     <LinearLayout
         android:layout_margin="30dp"

@@ -9,10 +9,9 @@
     <string name="your_application">Your Application</string>
     <string name="name">Name</string>
     <string name="go_back">Go Back</string>
-    <string name="test1">test1</string>
-    <string name="cv">CV</string>
-    <string name="item_default_name">Nom de l\'article</string>
-    <string name="item_default_price">0€</string>
-    <string name="contenu_de_l_annonce">Contenu de l\'annonce</string>
-    <string name="titre_de_l_annonce">Titre de l\'annonce</string>
+    <string name="hello">Hello</string>
+    <string name="welcome">Welcome on FirstJob</string>
+    <string name="choice">Choose a category</string>
+    <string name="btn_job">Get jobs</string>
+
 </resources>
