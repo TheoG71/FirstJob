@@ -50,7 +50,7 @@
                 android:id="@+id/btn_answer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/icone_anser_activity"
+                android:drawableLeft="@drawable/icone_answer_light"
                 android:layout_marginTop="20dp"/>
 
         </RelativeLayout>
@@ -81,6 +81,7 @@
 
         <ListView
             android:id="@+id/list"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />
