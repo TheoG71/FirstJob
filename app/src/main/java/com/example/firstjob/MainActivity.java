@@ -45,9 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         Button mButtonAnswer = (Button) findViewById(R.id.btn_answer);
-
         mButtonAnswer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,44 +60,32 @@ public class MainActivity extends AppCompatActivity {
         dropdown.setAdapter(adapter);
 
         Button mButtonGetJobs = (Button) findViewById(R.id.actu);
-
         mButtonGetJobs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String mValueSelected = dropdown.getSelectedItem().toString();
 
                 String mURL = "https://jobs.github.com/positions.json?description=" + mValueSelected;
-
-
+                //Call API
                 RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
                 JsonArrayRequest objectRequest = new JsonArrayRequest(
                         Request.Method.GET, mURL, null, new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e("Rest Response", response.toString());
-
-
                         try {
                             List<AnswerItem> mAnswerItemList = new ArrayList<>();
-
                             ListView listView = (ListView)findViewById(R.id.list);
-                            //ArrayList<String> arrayList = new ArrayList<>();
-
 
                             for (int i=0;i < response.length() ;i++){
                                 main = response.getJSONObject(i);
-                                String desc = main.getString("description");
-                                desc = desc.replaceAll("\\<.*?>", "");
-                                desc = desc.substring(0,50);
-                                desc += "...";
-                                mAnswerItemList.add(new AnswerItem(main.getString("title"), desc,"",""));
-                                //arrayList.add(main.getString("title"));
+                                String mDesc = main.getString("description");
+                                mDesc = mDesc.replaceAll("\\<.*?>", "");
+                                mDesc = mDesc.substring(0,50);
+                                mDesc += "...";
+                                mAnswerItemList.add(new AnswerItem(main.getString("title"), mDesc,"",""));
                             }
 
-                            //ArrayAdapter arrayAdapter = new ArrayAdapter(MainActivity.this,android.R.layout.simple_list_item_1,arrayList);
-                            //listView.setAdapter(arrayAdapter);
                             listView.setAdapter(new AnswerItemAdapter(MainActivity.this, mAnswerItemList));
-
                             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -112,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
                                         info.add(mInfoAPI.getString("location"));
                                         info.add(mInfoAPI.getString("title"));
                                         info.add(mInfoAPI.getString("description").replaceAll("\\\n", " ").replaceAll("\\<.*?>", ""));
-                                        //ajouter un bool pour le bouton de truc de ces grands morts
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
@@ -121,11 +106,8 @@ public class MainActivity extends AppCompatActivity {
                             });
 
                         } catch (JSONException e) {
-                            Toast.makeText(MainActivity.this, "j'ai rien recu", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
-
-
                     }
                 }, new Response.ErrorListener() {
                     @Override
@@ -141,22 +123,22 @@ public class MainActivity extends AppCompatActivity {
 
     private void openActivityDetails(ArrayList info) {
         Intent intent = new Intent(this, DetailsActivity.class);
+        //send to DetailsActivity an array
         intent.putStringArrayListExtra("info",new ArrayList<>(info));
-        Log.e("info :", info.toString());
         startActivity(intent);
     }
 
     private void openActivityAnswer() {
+        //Check if myfile.txt is empty
         String filename = "myfile.txt";
-        FileInputStream fis = null;
+        FileInputStream mfileInputStream = null;
         try {
-            fis = openFileInput(filename);
-            InputStreamReader ist = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(ist);
-            if (br.readLine() == null){
+            mfileInputStream = openFileInput(filename);
+            InputStreamReader mInputStreamReader = new InputStreamReader(mfileInputStream);
+            BufferedReader mBufferedReader = new BufferedReader(mInputStreamReader);
+            if (mBufferedReader.readLine() == null){
                 Toast.makeText(this, "You have to postulate", Toast.LENGTH_SHORT).show();
             }else{
-
                 Intent intent = new Intent(this, AnswerActivity.class);
                 startActivity(intent);
             }
@@ -165,8 +147,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
 }
