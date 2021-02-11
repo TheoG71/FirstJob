@@ -11,25 +11,28 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 
 public class DetailsActivity extends AppCompatActivity {
-    String date;
-    String company;
-    String location;
-    String title;
-    String description;
 
-    ListView mListView;
+
+    String mDate;
+    String mCompany;
+    String mLocation;
+    String mTitle;
+    String mDescription;
+
 
     private ArrayList<String> details  = new ArrayList();
     {
 
-        details.add(date);
-        details.add(company);
-        details.add(location);
-        details.add(title);
-        details.add(description);
+        details.add(mDate);
+        details.add(mCompany);
+        details.add(mLocation);
+        details.add(mTitle);
+        details.add(mDescription);
         Log.e("Coucou",details.toString());
 
     }
@@ -41,17 +44,26 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_details);
 
         ArrayList<String> reception = getIntent().getStringArrayListExtra("info");
-        mListView = (ListView) findViewById(R.id.listView);
 
-        date = reception.get(0);
-        company = reception.get(1);
-        location = reception.get(2);
-        title = reception.get(3);
-        description = reception.get(4);
 
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(DetailsActivity.this,android.R.layout.simple_list_item_1, android.R.id.text1, details);
+        mDate = reception.get(0);
+        mCompany = reception.get(1);
+        mLocation = reception.get(2);
+        mTitle = reception.get(3);
+        mDescription = reception.get(4);
 
-        mListView.setAdapter(adapter);
+        TextView created_at = (TextView)findViewById(R.id.created_at);
+        created_at.setText(String.valueOf(mDate));
+        TextView comp = (TextView)findViewById(R.id.comp);
+        comp.setText(String.valueOf(mCompany));
+        TextView place = (TextView)findViewById(R.id.place);
+        place.setText(String.valueOf(mLocation));
+        TextView name = (TextView)findViewById(R.id.name);
+        name.setText(String.valueOf(mTitle));
+        TextView information = (TextView)findViewById(R.id.information);
+        mDescription = mDescription.substring(1,350);
+        Jsoup.parse(mDescription).text();
+        information.setText(String.valueOf(mDescription));
 
         Button btn = (Button) findViewById(R.id.btn_post);
         //test test test //
