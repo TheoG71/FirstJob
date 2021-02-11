@@ -48,8 +48,8 @@ public class AnswerActivity extends AppCompatActivity {
 
         ArrayList<String> hired = new ArrayList();
         hired.add("true");
-        hired.add("refused");
-        hired.add("refused2");
+        hired.add("false");
+        hired.add("false");
 
         sectionList.add(title);
         sectionList.add(content);

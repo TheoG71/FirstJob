@@ -73,7 +73,15 @@ public class AnswerItemAdapter extends BaseAdapter{
 
         //get item hired view
         RelativeLayout itemHiredView = view.findViewById(R.id.item_hired);
-        
+
+        //Sets the color of the response
+        if (itemHired.equals("true")){
+            itemResponseView.setTextColor(Color.GREEN);
+//            itemHiredView.setBackgroundResource(R.color.accepted);
+        }else if (itemHired.equals("false")){
+            itemResponseView.setTextColor(Color.RED);
+//            itemHiredView.setBackgroundResource(R.color.refused);
+        }
 
         return view;
     }
