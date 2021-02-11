@@ -1,7 +1,9 @@
 package com.example.firstjob;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -12,11 +14,15 @@ import androidx.core.content.ContextCompat;
 
 import com.example.firstjob.adapters.AnswerItemAdapter;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,27 +35,36 @@ public class AnswerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answer);
+        ArrayList tmp = new ArrayList();
 
 
-        getArray();
+        try {
+            tmp = getArray();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
 
         //ArrayList 2D
         ArrayList<ArrayList<String>> sectionList = new ArrayList();
 
         ArrayList<String> title = new ArrayList();
-        title.add("Web developper");
-        title.add("Projet manager");
-        title.add("Marketing manager");
+        title.add((String) tmp.get(3));
+
+        //title.add("Web developper");
+        //title.add("Projet manager");
+        //title.add("Marketing manager");
 
         ArrayList<String> content = new ArrayList();
-        content.add("content number 1 let's add some text to make a way better looking render on our beautiful application");
-        content.add("content number 2 let's add some text to make a way better looking render on our beautiful application, but a lil' different so we have some diversity");
-        content.add("content number 3 let's add some shit to this announce displayer, it looks stunning !");
+        //content.add("content number 1 let's add some text to make a way better looking render on our beautiful application");
+        //content.add("content number 2 let's add some text to make a way better looking render on our beautiful application, but a lil' different so we have some diversity");
+        //content.add("content number 3 let's add some shit to this announce displayer, it looks stunning !");
 
         ArrayList<String> hired = new ArrayList();
-        hired.add("true");
-        hired.add("false");
-        hired.add("false");
+        //hired.add("true");
+        //hired.add("refused");
+        //hired.add("refused2");
 
         sectionList.add(title);
         sectionList.add(content);
@@ -71,20 +86,42 @@ public class AnswerActivity extends AppCompatActivity {
         listView.setAdapter(new AnswerItemAdapter(this, answerItemList));
     }
 
-    private ArrayList getArray() {
+    private ArrayList getArray() throws FileNotFoundException {
+        String filename = "myfile.txt";
+
+
         ArrayList load = new ArrayList();
 
+
+        FileInputStream fis = null;
         try {
-            File myObj = new File("");
-            Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
-                Log.e("info :", data);
+            fis = openFileInput(filename);
+            InputStreamReader ist = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(ist);
+            StringBuilder sb = new StringBuilder();
+            String text;
+
+
+
+            while ((text = br.readLine()) != null){
+
+                //sb.append(text).append("\n");
+                load.add(text);
+
             }
-            myReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
+            Log.e("aller ", sb.toString());
+        }catch (FileNotFoundException e) {
             e.printStackTrace();
+        }catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if (fis != null){
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
 
