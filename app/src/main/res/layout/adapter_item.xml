@@ -1,30 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        tools:ignore="UselessParent">
 
         <TextView
             android:id="@+id/item_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/item_default_name"
-            android:textSize="20dp"
-            android:textColor="@color/design_default_color_primary">
-
-        </TextView>
+            android:text="@string/titre_de_l_annonce"
+            android:textSize="20sp"
+            android:layout_margin="15dp"
+            android:textColor="@color/design_default_color_primary" />
 
         <TextView
             android:id="@+id/item_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/item_default_price"
-            android:layout_below="@+id/item_title">
-
-        </TextView>
+            android:text="@string/contenu_de_l_annonce"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_below="@+id/item_title" />
 
     </RelativeLayout>
 

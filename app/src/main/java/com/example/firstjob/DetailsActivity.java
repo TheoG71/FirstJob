@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import android.util.Log;
+
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class DetailsActivity extends AppCompatActivity {
+
 
     String mDate;
     String mCompany;
@@ -31,6 +34,7 @@ public class DetailsActivity extends AppCompatActivity {
         details.add(mTitle);
         details.add(mDescription);
         Log.e("Coucou",details.toString());
+
     }
 
 
@@ -38,6 +42,7 @@ public class DetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
+
         ArrayList<String> reception = getIntent().getStringArrayListExtra("info");
 
 
@@ -71,8 +76,6 @@ public class DetailsActivity extends AppCompatActivity {
 
 
     }
-
-
 
     private void openActivity(){
         Intent intent = new Intent(this, FormActivity.class);

@@ -18,47 +18,37 @@ public class AnswerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answer);
 
+        //ArrayList 2D
+        ArrayList<ArrayList<String>> sectionList = new ArrayList();
+
+        ArrayList<String> title = new ArrayList();
+        title.add("Web developper");
+        title.add("Projet manager");
+        title.add("Marketing manager");
+
+        ArrayList<String> content = new ArrayList();
+        content.add("content number 1 let's add some text to make a way better looking render on our beautiful application");
+        content.add("content number 2 let's add some text to make a way better looking render on our beautiful application, but a lil' different so we have some diversity");
+        content.add("content number 3 let's add some shit to this announce displayer, it looks stunning !");
+
+        sectionList.add(title);
+        sectionList.add(content);
+
+        int listSize = sectionList.size() + 1;
+
         //List of items
         List<AnswerItem> answerItemList = new ArrayList<>();
-        answerItemList.add(new AnswerItem("titre1", "content1"));
-        answerItemList.add(new AnswerItem("titre2", "content2"));
-        answerItemList.add(new AnswerItem("titre3", "content3"));
+
+        for (int i = 0; i < listSize; i++) {
+            answerItemList.add(new AnswerItem(sectionList.get(0).get(i), sectionList.get(1).get(i)));
+        }
+
+//        answerItemList.add(new AnswerItem("titre1", "content1"));
+//        answerItemList.add(new AnswerItem("titre2", "content2"));
+//        answerItemList.add(new AnswerItem("titre3", "content3"));
 
         //get list view
         ListView listView = findViewById(R.id.list_view);
         listView.setAdapter(new AnswerItemAdapter(this, answerItemList));
     }
-
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_answer);
-//
-//        ArrayList<ArrayList<String>> sectionList = new ArrayList();
-//
-//        ArrayList<String> title = new ArrayList();
-//        title.add("Web developper");
-//        title.add("Projet manager");
-//        title.add("Marketing manager");
-//
-//        ArrayList<String> content = new ArrayList();
-//        content.add("content1");
-//        content.add("content2");
-//        content.add("content3");
-//
-//        sectionList.add(title);
-//        sectionList.add(content);
-//
-//        TextView myTitleView = (TextView) findViewById(R.id.title);
-//        TextView myContentView = (TextView) findViewById(R.id.content);
-//
-//        int listSize = sectionList.size() + 1;
-//
-//        for (int i = 0; i < listSize; i++) {
-//            myTitleView.append(sectionList.get(0).get(i));
-//            myContentView.append(sectionList.get(1).get(i));
-//            myTitleView.append("\n");
-//            myContentView.append("\n");
-//        }
-//    }
 }
