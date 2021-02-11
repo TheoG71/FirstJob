@@ -5,9 +5,12 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -35,6 +38,23 @@ public class AnswerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answer);
+
+        Button btn_delete = (Button) findViewById(R.id.btn_delete);
+        btn_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String filename = "myfile.txt";
+                File file = new File(filename);
+                if (file.delete()){
+                    Toast.makeText(AnswerActivity.this, "Deleted the file", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(AnswerActivity.this, "Failed to delete the file.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+
         ArrayList tmp = new ArrayList();
 
 
@@ -53,18 +73,28 @@ public class AnswerActivity extends AppCompatActivity {
         ArrayList<String> content = new ArrayList();
         ArrayList<String> hired = new ArrayList();
 
-        for (int i = 3; i < tmp.size(); i+=5){
+        int j = 0;
+
+        Log.e("taille ", String.valueOf(tmp.size()));
+
+
+        for (int i = 3; i < tmp.size(); i+=6){
+            Log.e("i ", String.valueOf(i));
             title.add((String) tmp.get(i));
-            Log.e("NB ", String.valueOf(tmp.size()));
+            Log.e("title ", String.valueOf(tmp.get(i)));
         }
 
-        for (int i = 4; i < tmp.size(); i+=5){
+        for (int i = 4; i < tmp.size(); i+=6){
+            Log.e("i ", String.valueOf(i));
             content.add(((String) tmp.get(i)).substring(0,20));
+            Log.e("content ", String.valueOf(tmp.get(i)));
         }
 
-        for (int i = 5; i < tmp.size(); i+=5){
+        for (int i = 5; i < tmp.size(); i+=6){
+            Log.e("i ", String.valueOf(i));
             hired.add((String) tmp.get(i));
-            Log.e("NB ", String.valueOf(tmp.get(i)));
+            Log.e("hired ", String.valueOf(tmp.get(i)));
+            j++;
         }
 
         sectionList.add(title);
@@ -74,7 +104,7 @@ public class AnswerActivity extends AppCompatActivity {
         //List of items
         List<AnswerItem> answerItemList = new ArrayList<>();
 
-        for (int i = 0; i < sectionList.size() - 2; i++) {
+        for (int i = 0; i < j; i++) {
             if (sectionList.get(2).get(i).equals("true")){
                 answerItemList.add(new AnswerItem(sectionList.get(0).get(i), sectionList.get(1).get(i), sectionList.get(2).get(i), "Accepted"));
             }else{
