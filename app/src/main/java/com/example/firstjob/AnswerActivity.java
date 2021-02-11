@@ -11,8 +11,15 @@ import androidx.core.content.ContextCompat;
 
 import com.example.firstjob.adapters.AnswerItemAdapter;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class AnswerActivity extends AppCompatActivity {
 // Voici un commentaire pour pouvoir push
@@ -21,6 +28,9 @@ public class AnswerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answer);
+
+
+        getArray();
 
         //ArrayList 2D
         ArrayList<ArrayList<String>> sectionList = new ArrayList();
@@ -58,5 +68,16 @@ public class AnswerActivity extends AppCompatActivity {
         //get list view
         ListView listView = findViewById(R.id.list_view);
         listView.setAdapter(new AnswerItemAdapter(this, answerItemList));
+    }
+
+    private ArrayList getArray() {
+        ArrayList load = new ArrayList();
+        File file = new File("myfile.txt");
+
+        //le fichier myfile.txt et mettre dans
+
+
+        return load;
+
     }
 }
