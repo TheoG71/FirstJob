@@ -11,93 +11,80 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="310dp"
             android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:text="Bonjour"
-            android:layout_gravity="center"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Bienvenue sur FirstJob"
-            android:textSize="20dp"
-            android:layout_gravity="center"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Choisissez une catégorie"
-            android:textSize="15dp"
-            android:layout_gravity="center"
-            />
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:text="Bonjour"
+                android:layout_gravity="center"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bienvenue sur FirstJob"
+                android:textSize="20dp"
+                android:layout_gravity="center"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Choisissez une catégorie"
+                android:textSize="15dp"
+                android:layout_gravity="center"
+                />
+        </LinearLayout>
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            >
 
             <Button
+                android:id="@+id/btn_answer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Icon"/>
+                android:drawableLeft="@drawable/icone_anser_activity"
+                android:layout_marginTop="20dp"/>
 
         </RelativeLayout>
-
-
     </LinearLayout>
 
+
+
     <Spinner
+        android:layout_marginTop="10dp"
         android:id="@+id/category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:drawable/btn_dropdown"
         android:spinnerMode="dropdown"/>
 
-
     <Button
         android:id="@+id/actu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Get jobs"/>
-    <TextView
-        android:id="@+id/test"
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_margin="30dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        />
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
-    <TextView
-        android:id="@+id/desc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:maxLength="100"
-        />
+        android:layout_weight="0.1"
+        android:orientation="horizontal">
 
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
 
-    <ListView
-        android:id="@+id/list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:layout_marginTop="30dp"
-        android:id="@+id/btn_details"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="go to detailsActivity" />
-
-    <Button
-        android:id="@+id/btn_answer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="go to answerActivity"/>
-
-
+    </LinearLayout>
 
 </LinearLayout>
