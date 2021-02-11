@@ -26,8 +26,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
+import com.example.firstjob.adapters.AnswerItemAdapter;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
         public static final String EXTRA_TEXT= "com.example.application.example.EXTRA_TEXT";
@@ -80,17 +81,24 @@ public class MainActivity extends AppCompatActivity {
 
 
                         try {
+                            List<AnswerItem> answerItemList = new ArrayList<>();
+
                             ListView listView = (ListView)findViewById(R.id.list);
-                            ArrayList<String> arrayList = new ArrayList<>();
+                            //ArrayList<String> arrayList = new ArrayList<>();
 
 
                             for (int i=0;i < response.length() ;i++){
                                 main = response.getJSONObject(i);
-                                arrayList.add(main.getString("title"));
+                                String desc = main.getString("description");
+                                desc = desc.substring(0,50);
+                                desc += "...";
+                                answerItemList.add(new AnswerItem(main.getString("title"), desc));
+                                //arrayList.add(main.getString("title"));
                             }
 
-                            ArrayAdapter arrayAdapter = new ArrayAdapter(MainActivity.this,android.R.layout.simple_list_item_1,arrayList);
-                            listView.setAdapter(arrayAdapter);
+                            //ArrayAdapter arrayAdapter = new ArrayAdapter(MainActivity.this,android.R.layout.simple_list_item_1,arrayList);
+                            //listView.setAdapter(arrayAdapter);
+                            listView.setAdapter(new AnswerItemAdapter(MainActivity.this, answerItemList));
 
                             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
